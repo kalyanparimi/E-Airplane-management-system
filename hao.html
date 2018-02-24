@@ -1,0 +1,32 @@
+<html>
+    <head>
+    <title>Dynamic Drop Down List</title>
+    </head>
+    <BODY bgcolor ="white">
+        <form id="form1" name="form1" method="post" action="<?php echo $PHP_SELF; ?>">
+            Employee List :
+            <select Emp Name='NEW'>
+            <option value="">--- Select ---</option>
+            <?phpphp
+                mysql_connect ("localhost","root","");
+                mysql_select_db ("groupproj");
+                $select="groupproj";
+                if (isset ($select)&&$select!=""){
+                $select=$_POST ['NEW'];
+            }
+            ?>
+            <?phpphp
+                $list=mysql_query("select * from booking order by ticketno asc");
+            while($row_list=mysql_fetch_assoc($list)){
+                ?>
+                    <option value="<?php echo $row_list['ticketno']; ?>"<?php if($row_list['ticketno']==$select){ echo "selected"; } ?>>
+                                         <?php echo $row_list['fname'];?>
+                    </option>
+                <?php
+                }
+                ?>
+            </select>
+            <input type="submit" name="Submit" value="Select" />
+        </form>
+    </body>
+</html>
